@@ -1,0 +1,75 @@
+#----------------------------------
+# Title: condon-composer.yaml
+# Author: Laurel Condon
+# 8/27/23
+# Description: Composer Yaml 
+#----------------------------------
+
+# Define Open API
+openapi: 3.0.0
+info:
+  title: Composer API
+  version: 1.0.0
+
+# Paths
+paths:
+/composers:
+
+# Get for findAllComposers
+  get:
+  tags:
+    - Composers
+  operationId: findAllComposers
+  summary: Get a list of all composers
+  responses:
+  '200':
+    description: Successful response
+  '500':
+    description: Server Exception
+  '501':
+    description: MongoDB Exception
+
+# POST for createComposer    
+post:
+  tags:
+    - Composers
+  operationId: createComposer
+  summary: Create a new composer
+  requestBody:
+    content:
+       application/json:
+        schema:
+          type: object
+          properties:
+          firstName:
+            type: string
+          lastName:
+            type: string
+  responses:
+  '200':
+    description: User added
+  '500':
+    description: Server Exception
+  '501':
+    description: MongoDB Exception
+
+# GET for findComposerById    
+/composers/{id}:
+  get:
+    tags:
+      - Composers
+    operationId: findComposerById
+    summary: Get composer by ID
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Composer Document
+      '500':
+        description: Server Exception
+      '501':
+        description: MongoDB Exception                         
