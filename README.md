@@ -1,2 +1,5 @@
-# web-420
-Assignments for WEB 420 RESTful API's
+# WEB 420 RESTful APIs
+## Contributors
+
+* Professor Richard Krasso
+* Laurel Condon
