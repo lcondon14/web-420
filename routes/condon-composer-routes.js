@@ -28,10 +28,10 @@ router.get('/composers/:id', async (req, res) => {
     try {
         const composer = await Composer.findOne({ _id: req.params.id });
         if (composer) {
-            return res.status(404).json({message: 'Composer not found.' });
-        }
             res.status(200).json(composer);
-    } catch (err) {
+        }
+        return res.status(404).json({message: 'Composer not found.' });
+        } catch (err) {
         res.status(500).json({ message: 'Server Error' });
     }
 });
@@ -47,6 +47,35 @@ router.post('/composers', async (req, res) => {
         res.status(201).json(composer);
     } catch (error) {
         res.status(500).json({ message: 'Server Error'});
+    }
+});
+
+// Update Composer ID
+router.put('/api/composers/:id', async (req, res) => {
+    try {
+        const composer = await Composer.findOne({ _id: req.params.id });
+        if (composer) {
+            composer.set(req.body);
+            const savedComposer = await composer.save();
+            res.status(200).json(savedComposer);
+        } else {
+            res.status(401).json({ message: 'Composer not found.'});
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error.'})
+    }
+});
+
+router.delete('/api/composers/:id', async (req, res) => {
+    try {
+        const deletedComposer = await Composer.findByIdAndDelete(req.params.id);
+        if (deletedComposer) {
+            res.status(200).json(deletedComposer);
+        } else {
+            res.status(401).json({ message: 'Composer not found.' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error.' });
     }
 });
 
