@@ -12,7 +12,7 @@ const router = express.Router();
 const Team = require('../models/condon-team');
 
 // Finds all teams
-router.get('/teams', asynce(req, res) => {
+router.get('/teams', async (req, res) => {
     try{ 
         const teams = await Team.find();
         res.satus(200).json(teams);
@@ -52,7 +52,7 @@ try {
 
 // Finds all players on a team
 router.get('/teams/:id/players', async (req, res) => {
-    const { id } + req.params;
+    const { id } = req.params;
     try {
         const team = await Team.findById(id);
 
